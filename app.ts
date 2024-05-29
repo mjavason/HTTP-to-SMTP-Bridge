@@ -1,9 +1,11 @@
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
+import cors from 'cors';
 import axios from 'axios';
 import dotenv from 'dotenv';
 
 const app = express();
+app.use(cors());
 dotenv.config({ path: './.env' });
 
 //keys and configs
@@ -13,7 +15,7 @@ const baseURL = 'https://httpbin.org';
 //#region Server setup
 
 // default message
-app.get('/api', async(req: Request, res: Response) => {
+app.get('/api', async (req: Request, res: Response) => {
   const result = await axios.get(baseURL);
   console.log(result.status);
   res.send({ message: 'Demo API called (httpbin.org)', data: result.status });
