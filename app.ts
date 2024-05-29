@@ -7,7 +7,7 @@ const app = express();
 
 //keys and configs
 const PORT = process.env.PORT || 5000;
-const baseURL = 'https://httpbIn.org';
+const baseURL = 'https://httpbin.org';
 
 //#region Server setup
 dotenv.config({ path: './.env' });
@@ -16,7 +16,7 @@ dotenv.config({ path: './.env' });
 app.get('/api', async(req: Request, res: Response) => {
   const result = await axios.get(baseURL);
   console.log(result.status);
-  res.send({ message: 'API is Live!', data: result.data });
+  res.send({ message: 'API is Live!', data: result.status });
 });
 
 //default message
