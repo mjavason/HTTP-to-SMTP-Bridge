@@ -4,19 +4,19 @@ import axios from 'axios';
 import dotenv from 'dotenv';
 
 const app = express();
+dotenv.config({ path: './.env' });
 
 //keys and configs
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 const baseURL = 'https://httpbin.org';
 
 //#region Server setup
-dotenv.config({ path: './.env' });
 
 // default message
 app.get('/api', async(req: Request, res: Response) => {
   const result = await axios.get(baseURL);
   console.log(result.status);
-  res.send({ message: 'API is Live!', data: result.status });
+  res.send({ message: 'Demo API called (httpbin.org)', data: result.status });
 });
 
 //default message
