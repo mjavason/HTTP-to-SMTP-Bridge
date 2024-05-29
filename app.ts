@@ -5,6 +5,8 @@ import axios from 'axios';
 import dotenv from 'dotenv';
 
 const app = express();
+app.use(express.json());// Middleware to parse JSON or URL-encoded data
+app.use(express.urlencoded({ extended: true })); // For complex form data
 app.use(cors());
 dotenv.config({ path: './.env' });
 
