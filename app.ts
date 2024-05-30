@@ -39,7 +39,7 @@ app.listen(PORT, async () => {
 });
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  console.log(`${'\x1b[31m'}${err.message}${'\x1b[0m]'}`);
+  console.log(`${'\x1b[31m'}${err.message}${'\x1b][0m]'}`);
   return res
     .status(500)
     .send({ success: false, status: 500, message: err.message });
