@@ -39,6 +39,8 @@ app.listen(PORT, async () => {
 });
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  // throw Error('This is a sample error');
+
   console.log(`${'\x1b[31m'}${err.message}${'\x1b][0m]'}`);
   return res
     .status(500)
