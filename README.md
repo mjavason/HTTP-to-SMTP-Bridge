@@ -16,7 +16,7 @@ git clone https://github.com/mjavason/...
 2. Navigate to the project directory:
 
 ```bash
-cd project-name
+cd project-name...
 ```
 
 3. Install the project's dependencies:
