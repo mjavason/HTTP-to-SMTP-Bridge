@@ -4,15 +4,18 @@ import cors from 'cors';
 import axios from 'axios';
 import dotenv from 'dotenv';
 
+//#region app setup
 const app = express();
-app.use(express.json());// Middleware to parse JSON or URL-encoded data
+app.use(express.json()); // Middleware to parse JSON or URL-encoded data
 app.use(express.urlencoded({ extended: true })); // For complex form data
 app.use(cors());
 dotenv.config({ path: './.env' });
+//#endregion
 
-//keys and configs
+//#region keys and configs
 const PORT = process.env.PORT || 3000;
 const baseURL = 'https://httpbin.org';
+//#endregion
 
 //#region Server setup
 
@@ -20,13 +23,16 @@ const baseURL = 'https://httpbin.org';
 app.get('/api', async (req: Request, res: Response) => {
   const result = await axios.get(baseURL);
   console.log(result.status);
-  return res.send({ message: 'Demo API called (httpbin.org)', data: result.status });
+  return res.send({
+    message: 'Demo API called (httpbin.org)',
+    data: result.status,
+  });
 });
 
 //default message
-app.get('/', (req: Request, res: Response) =>{
-  return res.send({ message: 'API is Live!' })}
-);
+app.get('/', (req: Request, res: Response) => {
+  return res.send({ message: 'API is Live!' });
+});
 
 app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
