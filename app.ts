@@ -19,6 +19,18 @@ const baseURL = 'https://httpbin.org';
 
 //#region Server setup
 
+async function pingSelf() {
+  try {
+    const { data } = await axios.get(`http://localhost:5000`);
+
+    console.log(`Server pinged successfully: ${data.message}`);
+    return true;
+  } catch (e: any) {
+    console.log(`this the error message: ${e.message}`);
+    return;
+  }
+}
+
 // default message
 app.get('/api', async (req: Request, res: Response) => {
   const result = await axios.get(baseURL);
@@ -37,6 +49,9 @@ app.get('/', (req: Request, res: Response) => {
 app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+// (for render services) Keep the API awake by pinging it periodically
+// setInterval(pingSelf, 600000);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   // throw Error('This is a sample error');
