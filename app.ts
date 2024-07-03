@@ -17,6 +17,10 @@ const PORT = process.env.PORT || 3000;
 const baseURL = 'https://httpbin.org';
 //#endregion
 
+//#region Code here
+console.log('Hello world');
+//#endregion
+
 //#region Server setup
 
 async function pingSelf() {
@@ -47,7 +51,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 // Middleware to handle 404 Not Found
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req: Request, res: Response) => {
   return res
     .status(404)
     .json({ success: false, message: 'API route does not exist' });
