@@ -46,6 +46,13 @@ app.get('/', (req: Request, res: Response) => {
   return res.send({ message: 'API is Live!' });
 });
 
+// Middleware to handle 404 Not Found
+app.use((req: Request, res: Response, next: NextFunction) => {
+  return res
+    .status(404)
+    .json({ success: false, message: 'API route does not exist' });
+});
+
 app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
 });
