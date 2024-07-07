@@ -5,6 +5,7 @@ import axios from 'axios';
 import dotenv from 'dotenv';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import morgan from 'morgan';
 
 //#region app setup
 const app = express();
@@ -49,6 +50,7 @@ app.use(express.json()); // Middleware to parse JSON or URL-encoded data
 app.use(express.urlencoded({ extended: true })); // For complex form data
 app.use(cors());
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(morgan('dev')); // Options include: 'combined', 'common', 'dev', 'tiny', 'combined' logs more details
 dotenv.config({ path: './.env' });
 //#endregion
 
