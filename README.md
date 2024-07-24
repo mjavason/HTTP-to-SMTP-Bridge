@@ -47,7 +47,7 @@ There are four main scripts defined in this project's `package.json` file:
 
 **API Documentation**
 
-After starting the API, you can access the documentation at the `/docs` route. Open your browser and go to [http://localhost:5000/doc](http://localhost:5000/doc) to view the API documentation.
+After starting the API, you can access the documentation at the `/docs` route. Open your browser and go to [http://localhost:5000/docs](http://localhost:5000/docs) to view the API documentation.
 
 **Additional Notes**
 
