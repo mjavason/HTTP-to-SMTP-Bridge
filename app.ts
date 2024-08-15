@@ -10,7 +10,7 @@ import morgan from 'morgan';
 //#region App Setup
 const app = express();
 dotenv.config({ path: './.env' });
-const BASE_URL = process.env.BASE_URL || 'https://live-url.com'
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
 
 const SWAGGER_OPTIONS = {
   swaggerDefinition: {
@@ -27,12 +27,7 @@ const SWAGGER_OPTIONS = {
     },
     servers: [
       {
-        url: 'http://localhost:5000',
-        description: 'Development Environment',
-      },
-      {
         url: BASE_URL,
-        description: 'Staging Environment',
       },
     ],
     tags: [
@@ -57,7 +52,6 @@ app.use(morgan('dev'));
 
 //#region Keys and Configs
 const PORT = process.env.PORT || 3000;
-const baseURL = 'https://httpbin.org';
 //#endregion
 
 //#region Code here
@@ -94,7 +88,7 @@ async function pingSelf() {
  */
 app.get('/api', async (req: Request, res: Response) => {
   try {
-    const result = await axios.get(baseURL);
+    const result = await axios.get('https://httpbin.org');
     return res.send({
       message: 'Demo API called (httpbin.org)',
       data: result.status,
