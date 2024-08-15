@@ -10,6 +10,7 @@ import morgan from 'morgan';
 //#region App Setup
 const app = express();
 dotenv.config({ path: './.env' });
+const BASE_URL = process.env.BASE_URL || 'https://live-url.com'
 
 const SWAGGER_OPTIONS = {
   swaggerDefinition: {
@@ -30,7 +31,7 @@ const SWAGGER_OPTIONS = {
         description: 'Development Environment',
       },
       {
-        url: 'https://live.onrender.com/api/v1',
+        url: BASE_URL,
         description: 'Staging Environment',
       },
     ],
