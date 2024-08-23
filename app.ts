@@ -3,56 +3,23 @@ import 'express-async-errors';
 import cors from 'cors';
 import axios from 'axios';
 import dotenv from 'dotenv';
-import swaggerJSDoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
 import morgan from 'morgan';
+import { setupSwagger } from './swagger.config';
 
 //#region App Setup
 const app = express();
+
 dotenv.config({ path: './.env' });
-const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
-
-const SWAGGER_OPTIONS = {
-  swaggerDefinition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Typescript SFA',
-      version: '1.0.0',
-      description:
-        'This is a single file typescript template app for faster idea testing and prototyping. It contains tests, one demo root API call, basic async error handling, one demo axios call and .env support.',
-      contact: {
-        name: 'Orji Michael',
-        email: 'orjimichael4886@gmail.com',
-      },
-    },
-    servers: [
-      {
-        url: BASE_URL,
-      },
-    ],
-    tags: [
-      {
-        name: 'Default',
-        description: 'Default API Operations that come inbuilt',
-      },
-    ],
-  },
-  apis: ['**/*.ts'],
-};
-
-const swaggerSpec = swaggerJSDoc(SWAGGER_OPTIONS);
+const PORT = process.env.PORT || 3000;
+const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(morgan('dev'));
+setupSwagger(app, BASE_URL);
 
-//#endregion
-
-//#region Keys and Configs
-const PORT = process.env.PORT || 3000;
-//#endregion
+//#endregion App Setup
 
 //#region Code here
 console.log('Hello world');
@@ -60,19 +27,6 @@ console.log('Hello world');
 
 //#region Server Setup
 
-// Function to ping the server itself
-async function pingSelf() {
-  try {
-    const { data } = await axios.get(`http://localhost:5000`);
-    console.log(`Server pinged successfully: ${data.message}`);
-    return true;
-  } catch (e: any) {
-    console.error(`Error pinging server: ${e.message}`);
-    return false;
-  }
-}
-
-// Route for external API call
 /**
  * @swagger
  * /api:
@@ -99,7 +53,6 @@ app.get('/api', async (req: Request, res: Response) => {
   }
 });
 
-// Route for health check
 /**
  * @swagger
  * /:
@@ -117,7 +70,6 @@ app.get('/', (req: Request, res: Response) => {
   return res.send({ message: 'API is Live!' });
 });
 
-// Middleware to handle 404 Not Found
 /**
  * @swagger
  * /obviously/this/route/cant/exist:
@@ -149,6 +101,6 @@ app.listen(PORT, async () => {
 });
 
 // (for render services) Keep the API awake by pinging it periodically
-// setInterval(pingSelf, 600000);
+// setInterval(pingSelf(BASE_URL), 600000);
 
 //#endregion
