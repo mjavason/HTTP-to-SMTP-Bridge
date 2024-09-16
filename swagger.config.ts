@@ -8,7 +8,7 @@ export function setupSwagger(app: Express, url: string) {
       openapi: '3.0.0',
       info: {
         title: 'Typescript SFA',
-        version: '1.0.0',
+        version: '1.0.1',
         description:
           'This is a single file typescript template app for faster idea testing and prototyping. It contains tests, one demo root API call, basic async error handling, one demo axios call and .env support.',
         contact: {
@@ -19,12 +19,6 @@ export function setupSwagger(app: Express, url: string) {
       servers: [
         {
           url,
-        },
-      ],
-      tags: [
-        {
-          name: 'Default',
-          description: 'Default API Operations that come inbuilt',
         },
       ],
     },

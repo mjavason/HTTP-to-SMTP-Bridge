@@ -10,7 +10,7 @@ import { setupSwagger } from './swagger.config';
 const app = express();
 
 dotenv.config({ path: './.env' });
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 app.use(express.json());
@@ -89,8 +89,10 @@ app.use((req: Request, res: Response) => {
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   // throw Error('This is a sample error');
-
-  console.log(`${'\x1b[31m'}${err.message}${'\x1b][0m]'} `);
+  console.log(`${'\x1b[31m'}`); // start color red
+  console.log(`${err.message}`);
+  console.log(`${'\x1b][0m]'}`); //stop color
+  
   return res
     .status(500)
     .send({ success: false, status: 500, message: err.message });
