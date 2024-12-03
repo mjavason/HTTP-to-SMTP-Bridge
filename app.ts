@@ -1,4 +1,4 @@
-import express, { type Request, type Response, type NextFunction } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
 import axios from 'axios';
@@ -9,12 +9,18 @@ import { setupSwagger } from './swagger.config';
 //#region App Setup
 const app = express();
 
-dotenv.config({ path: './.env' });
+dotenv.config({
+  path: './.env',
+});
 const PORT = process.env.PORT || 5000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(
+  express.urlencoded({
+    extended: true,
+  }),
+);
 app.use(cors());
 app.use(morgan('dev'));
 setupSwagger(app, BASE_URL);
@@ -49,7 +55,9 @@ app.get('/api', async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     console.error('Error calling external API:', error.message);
-    return res.status(500).send({ error: 'Failed to call external API' });
+    return res.status(500).send({
+      error: 'Failed to call external API',
+    });
   }
 });
 
@@ -67,7 +75,9 @@ app.get('/api', async (req: Request, res: Response) => {
  *         description: Bad request.
  */
 app.get('/', (req: Request, res: Response) => {
-  return res.send({ message: 'API is Live!' });
+  return res.send({
+    message: 'API is Live!',
+  });
 });
 
 /**
@@ -82,9 +92,10 @@ app.get('/', (req: Request, res: Response) => {
  *         description: Route not found
  */
 app.use((req: Request, res: Response) => {
-  return res
-    .status(404)
-    .json({ success: false, message: 'API route does not exist' });
+  return res.status(404).json({
+    success: false,
+    message: 'API route does not exist',
+  });
 });
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
@@ -92,10 +103,12 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.log(`${'\x1b[31m'}`); // start color red
   console.log(`${err.message}`);
   console.log(`${'\x1b][0m]'}`); //stop color
-  
-  return res
-    .status(500)
-    .send({ success: false, status: 500, message: err.message });
+
+  return res.status(500).send({
+    success: false,
+    status: 500,
+    message: err.message,
+  });
 });
 
 app.listen(PORT, async () => {
