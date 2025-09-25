@@ -35,34 +35,6 @@ console.log('Hello world');
 
 /**
  * @swagger
- * /api:
- *   get:
- *     summary: Call a demo external API (httpbin.org)
- *     description: Returns an object containing demo content
- *     tags: [Default]
- *     responses:
- *       '200':
- *         description: Successful.
- *       '400':
- *         description: Bad request.
- */
-app.get('/api', async (req: Request, res: Response) => {
-  try {
-    const result = await axios.get('https://httpbin.org');
-    return res.send({
-      message: 'Demo API called (httpbin.org)',
-      data: result.status,
-    });
-  } catch (error: any) {
-    console.error('Error calling external API:', error.message);
-    return res.status(500).send({
-      error: 'Failed to call external API',
-    });
-  }
-});
-
-/**
- * @swagger
  * /:
  *   get:
  *     summary: API Health check

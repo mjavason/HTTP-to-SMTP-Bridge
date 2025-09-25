@@ -1,4 +1,4 @@
-# Typescript-SF-Template-App
+# HTTP-To-SMTP-Bridge
 
 This is a single file TypeScript template app for faster idea testing and prototyping. It contains tests, one demo root API call, basic async error handling, one demo axios call, and .env support.
 
