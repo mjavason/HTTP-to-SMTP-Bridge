@@ -1,23 +1,32 @@
 # HTTP-To-SMTP-Bridge
 
-This is a single file TypeScript template app for faster idea testing and prototyping. It contains tests, one demo root API call, basic async error handling, one demo axios call, and .env support.
+A secure HTTP to SMTP bridge service that allows applications to send emails through HTTP API calls. This service acts as a middleware between your applications and SMTP servers, providing a simple REST API for sending emails with authentication and logging capabilities.
 
-**Prerequisites**
+## Features
 
-- Node.js and npm (or yarn) installed on your system. You can download them from the [official Node.js website](https://nodejs.org).
+- 🔒 **Bearer Token Authentication** - Secure your email sending endpoint
+- 📧 **SMTP Integration** - Connect to any SMTP server (Gmail, Outlook, custom servers)
+- 🌐 **REST API** - Simple HTTP POST interface for sending emails
+- 📊 **Swagger Documentation** - Interactive API documentation at `/docs`
+- 🪵 **Logging with Pino** - Structured logging with optional Loki integration
 
-**Installation**
+## Prerequisites
 
-1. Clone this repository using git:
+- Node.js (v14 or higher) and npm installed on your system. You can download them from the [official Node.js website](https://nodejs.org)
+- Access to an SMTP server (Gmail, Outlook, SendGrid, etc.)
+
+## Installation
+
+1. Clone this repository:
 
    ```bash
-   git clone https://github.com/mjavason/...
+   git clone https://github.com/mjavason/HTTP-to-SMTP-Bridge.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd project-name...
+   cd HTTP-to-SMTP-Bridge
    ```
 
 3. Install the project's dependencies:
@@ -26,30 +35,68 @@ This is a single file TypeScript template app for faster idea testing and protot
    npm install
    ```
 
-**Running the project**
+4. Set up your environment variables by copying the sample file:
 
-There are four main scripts defined in this project's `package.json` file:
+   ```bash
+   cp env.sample .env
+   ```
 
-- **npm run dev**
+5. Configure your environment variables in `.env` file according to your SMTP server and security requirements.
 
-  - This script is used for development purposes. It will start a development server and enable hot reloading.
+## Running the Project
 
-- **npm run build**
+### Development Mode
 
-  - This script is used to build the project for production. It will bundle your code, minify files, and store them in a 'build' folder.
+Start the development server with hot reloading:
 
-- **npm run start**
+```bash
+npm run dev
+```
 
-  - This script starts the application in production mode. It's what you would typically run after building the project for deployment.
+### Production Build
 
-- **npm run test**
-  - This script runs the project's tests. Make sure you've installed the packages before running this script.
+1. Build the project:
 
-**API Documentation**
+   ```bash
+   npm run build
+   ```
 
-After starting the API, you can access the documentation at the `/docs` route. Open your browser and go to [http://localhost:5000/docs](http://localhost:5000/docs) to view the API documentation.
+2. Start the production server:
+   ```bash
+   npm run start
+   ```
 
-**Additional Notes**
+### Testing
 
-- Refer to the `package.json` file for any additional scripts specific to this project.
-- Configuration files (e.g., `.env`) might be required for the project to run properly. Take a look at the `env.sample` file for a guide. Make sure you have them set up according to your environment.
+Run the test suite:
+
+```bash
+npm run test
+```
+
+## API Documentation
+
+After starting the server, you can access the interactive Swagger documentation at:
+
+- **Local**: [http://localhost:5000/docs](http://localhost:5000/docs)
+- **Production**: `{BASE_URL}/docs`
+
+## Security Notes
+
+- Always use environment variables for sensitive configuration
+- Use strong, unique passwords for the `APP_PASSWORD`
+
+## Logging
+
+The service includes structured logging with Pino. Logs include:
+
+- Email sending attempts
+- Authentication failures
+- Server startup information
+- Error tracking
+
+Optional Loki integration for centralized logging in production environments.
+
+## License
+
+This project is licensed under the ISC License.
