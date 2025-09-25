@@ -7,7 +7,7 @@ export function setupSwagger(app: Express, url: string) {
     swaggerDefinition: {
       openapi: '3.0.0',
       info: {
-        title: 'Typescript SFA',
+        title: 'HTML To SMTP Bridge',
         version: '1.0.1',
         description:
           'This is a single file typescript template app for faster idea testing and prototyping. It contains tests, one demo root API call, basic async error handling, one demo axios call and .env support.',
@@ -19,6 +19,20 @@ export function setupSwagger(app: Express, url: string) {
       servers: [
         {
           url,
+        },
+      ],
+      components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
+          },
+        },
+      },
+      security: [
+        {
+          bearerAuth: [],
         },
       ],
     },
